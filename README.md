@@ -3,7 +3,7 @@
 ### Build
 
 - Build: `go build`, опционально флаг `-o` указывает куда билдить: `go build -o ../gobuilds`
-- After build you can execute: `./main`
+- После вы можете запустить его: `./main`
 
 ### Without build
 
