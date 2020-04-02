@@ -1,40 +1,90 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"github.com/LimeHD/epg_api/entries"
 	"github.com/savsgio/atreugo/v11"
+	"github.com/urfave/cli/v2"
+	"log"
+	"os"
 )
 
 func main() {
-	host := flag.String("host", "127.0.0.1", "a string")
-	port := flag.Int("port", 8000, "a int")
+	app := &cli.App{
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:  "host",
+				Value: "127.0.0.1",
+				Usage: "run in host",
+			},
+			&cli.IntFlag{
+				Name:  "port",
+				Value: 8001,
+				Usage: "run in port",
+			},
 
-	dbhost := flag.String("dbhost", "127.0.0.1", "a string")
-	dbuser := flag.String("dbuser", "root", "a string")
-	dbpass := flag.String("dbpass", "", "a string")
-	dbname := flag.String("dbname", "", "a string")
-	dbport := flag.Int("dbport", 9000, "a string")
-
-	fmt.Println(fmt.Sprintf("Full flags: host: %v, port: %v \nmysql://%v:%v@%v:%v/%v",
-		*host, *port, *dbuser, *dbpass, *dbhost, *dbport, *dbname))
-
-	flag.Parse()
-
-	// todo run through unix socket
-	config := atreugo.Config{
-		Addr: fmt.Sprintf("%v:%v", *host, *port),
+			// database
+			&cli.StringFlag{
+				Name:  "dbhost",
+				Value: "localhost",
+				Usage: "Database host",
+			},
+			&cli.StringFlag{
+				Name:  "dbuser",
+				Value: "root",
+				Usage: "Database user",
+			},
+			&cli.StringFlag{
+				Name:  "dbpass",
+				Value: "",
+				Usage: "Database password",
+			},
+			&cli.StringFlag{
+				Name:  "dbname",
+				Value: "db",
+				Usage: "Database name",
+			},
+			&cli.IntFlag{
+				Name:  "dbport",
+				Value: 9000,
+				Usage: "Database port",
+			},
+		},
 	}
 
-	server := atreugo.New(config)
-	server.Path("GET", "/channels", ChannelsAction)
-	server.Path("GET", "/channels/{id}/programm", ProgrammAction)
+	app.Action = func(c *cli.Context) error {
+		host := c.String("host")
+		port := c.Int("port")
+		dbhost := c.String("dbhost")
+		dbuser := c.String("dbuser")
+		dbpass := c.String("dbpass")
+		dbname := c.String("dbname")
+		dbport := c.Int("dbport")
 
-	err := server.ListenAndServe()
+		fmt.Println(fmt.Sprintf("Full flags: host: %s, port: %d \nmysql://%s:%s@%s:%d/%s",
+			host, port, dbuser, dbpass, dbhost, dbport, dbname))
+
+		// todo run through unix socket
+		config := atreugo.Config{
+			Addr: fmt.Sprintf("%v:%v", host, port),
+		}
+
+		server := atreugo.New(config)
+		server.Path("GET", "/channels", ChannelsAction)
+		server.Path("GET", "/channels/{id}/programm", ProgrammAction)
+
+		err := server.ListenAndServe()
+
+		if err != nil {
+			panic(err)
+		}
+		return nil
+	}
+
+	err := app.Run(os.Args)
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
 
