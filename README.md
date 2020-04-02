@@ -27,3 +27,7 @@ WantedBy=multi-user.target
 
 ```
 
+### Tests
+
+- Запуск тестов: `go test`
+
