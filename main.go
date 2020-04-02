@@ -1,13 +1,30 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"github.com/LimeHD/epg_api/entries"
 	"github.com/savsgio/atreugo/v11"
 )
 
 func main() {
+	host := flag.String("host", "127.0.0.1", "a string")
+	port := flag.Int("port", 8000, "a int")
+
+	dbhost := flag.String("dbhost", "127.0.0.1", "a string")
+	dbuser := flag.String("dbuser", "root", "a string")
+	dbpass := flag.String("dbpass", "", "a string")
+	dbname := flag.String("dbname", "", "a string")
+	dbport := flag.Int("dbport", 9000, "a string")
+
+	fmt.Println(fmt.Sprintf("Full flags: host: %v, port: %v \nmysql://%v:%v@%v:%v/%v",
+		*host, *port, *dbuser, *dbpass, *dbhost, *dbport, *dbname))
+
+	flag.Parse()
+
+	// todo run through unix socket
 	config := atreugo.Config{
-		Addr: "127.0.0.1:8000",
+		Addr: fmt.Sprintf("%v:%v", *host, *port),
 	}
 
 	server := atreugo.New(config)
