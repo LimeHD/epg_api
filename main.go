@@ -5,6 +5,20 @@ import (
 	"github.com/savsgio/atreugo/v11"
 )
 
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample server celler server.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host epg.iptv2021.com
+// @BasePath /v1
 func main() {
 	config := atreugo.Config{
 		Addr: "127.0.0.1:8000",
@@ -21,6 +35,14 @@ func main() {
 	}
 }
 
+// Channels godoc
+// @Summary Show list of all channels
+// @Description get string by ID
+// @ID get-string-by-int
+// @Accept json
+// @Produce json
+// @Router /channels [get]
+// @Success 200 {array} entries.Channel "ok"
 func ChannelsAction(ctx *atreugo.RequestCtx) error {
 	exampleResponse := []entries.Channel{}
 
@@ -39,6 +61,15 @@ func ChannelsAction(ctx *atreugo.RequestCtx) error {
 	return ctx.JSONResponse(exampleResponse)
 }
 
+// ProgrammAction godoc
+// @Summary Show TV programm list
+// @Description get string by ID
+// @ID get-string-by-int
+// @Accept json
+// @Produce json
+// @Param id path int true "Channel ID"
+// @Router /channels/{id}/programm [get]
+// @Success 200 {array} entries.ProgrammResponse "ok"
 func ProgrammAction(ctx *atreugo.RequestCtx) error {
 	//id := ctx.UserValue("id").(string)
 

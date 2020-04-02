@@ -1,0 +1,82 @@
+basePath: /v1
+definitions:
+  entries.Channel:
+    properties:
+      name_en:
+        type: string
+      name_ru:
+        type: string
+      our_id:
+        type: integer
+    type: object
+  entries.Programm:
+    properties:
+      desc:
+        type: string
+      title:
+        type: string
+    type: object
+  entries.ProgrammResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/entries.Programm'
+        type: array
+      name:
+        type: string
+      title:
+        type: string
+    type: object
+host: epg.iptv2021.com
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /channels:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: get-string-by-int
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/entries.Channel'
+            type: array
+      summary: Show list of all channels
+  /channels/{id}/programm:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: get-string-by-int
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/entries.ProgrammResponse'
+            type: array
+      summary: Show TV programm list
+swagger: "2.0"
