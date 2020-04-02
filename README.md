@@ -9,6 +9,13 @@
 
 - Run: `go run .`
 
+#### Flags & Env easy to use
+
+Можно комбинировать одни и те же параметы через аргументы командной строи и через переменные окружения
+
+- in command line `go run . --host localhost --port 1337`
+- in environment vars `todo`
+
 ### Systemd
 
 ```
