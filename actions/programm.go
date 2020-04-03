@@ -5,9 +5,7 @@ import (
 	"github.com/LimeHD/epg_api/helpers"
 	"github.com/LimeHD/epg_api/utils"
 	"github.com/savsgio/atreugo/v11"
-	"sort"
 	"strconv"
-	"time"
 )
 
 // ProgrammAction godoc
@@ -24,38 +22,20 @@ func ProgrammAction(ctx *atreugo.RequestCtx) error {
 	tz := utils.ByteToInt(ctx.QueryArgs().Peek("tz"))
 	msk := utils.ByteToInt(ctx.QueryArgs().Peek("msk"))
 	curdate := utils.ByteToInt(ctx.QueryArgs().Peek("curdate"))
-	var response interface{}
 
-	programm := entries.GetProgramm(id, helpers.GetTimezoneByValues(tz, msk), curdate)
+	programm, ok := entries.GetProgramm(id, helpers.GetTimezoneByValues(tz, msk), curdate)
 
-	// return empty array
-	if len(programm) == 0 {
+	if !ok {
 		return ctx.JSONResponse(make([]string, 0))
 	}
 
-	// check only current day returned
 	if curdate == 1 {
-		nowDay := utils.YearMonthDay(time.Now().Unix())
-
-		response = make([]string, 0)
-
-		if v, ok := programm[nowDay]; ok {
-			response = v
+		if today := programm.GetToday(); today != nil {
+			return ctx.JSONResponse(today)
 		}
 
-		return ctx.JSONResponse(response)
+		return ctx.JSONResponse(make([]string, 0))
 	}
 
-	v := []*entries.ProgrammResponse{}
-
-	// make flat
-	for _, value := range programm {
-		v = append(v, value)
-	}
-
-	sort.Slice(v[:], func(i, j int) bool {
-		return v[i].Title < v[j].Title
-	})
-
-	return ctx.JSONResponse(v)
+	return ctx.JSONResponse(programm.MakeFlat())
 }
