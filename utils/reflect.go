@@ -1,7 +1,10 @@
 package utils
 
 import (
+	"fmt"
 	"reflect"
+	"strconv"
+	"strings"
 )
 
 func Empty(val interface{}) bool {
@@ -41,4 +44,31 @@ func In(slice []string, val string) (int, bool) {
 		}
 	}
 	return -1, false
+}
+
+func ContainsMap(s map[int]int, e int) bool {
+	if _, ok := s[e]; ok {
+		return true
+	}
+
+	return false
+}
+
+func IntMapKeys(m map[int]int) []int {
+	var keys []int
+
+	for k := range m {
+		keys = append(keys, k)
+	}
+
+	return keys
+}
+
+func ArrayToString(a []int, delim string) string {
+	return strings.Trim(strings.Replace(fmt.Sprint(a), " ", delim, -1), "[]")
+}
+
+func ByteToInt(b []byte) int {
+	i, _ := strconv.Atoi(string(b))
+	return i
 }

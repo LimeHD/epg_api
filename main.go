@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/LimeHD/epg_api/actions"
+	"github.com/LimeHD/epg_api/helpers"
 	"github.com/LimeHD/epg_api/middlewares"
+	"github.com/LimeHD/epg_api/service"
 	"github.com/savsgio/atreugo/v11"
 	"github.com/urfave/cli/v2"
 	"log"
@@ -41,12 +43,12 @@ func main() {
 			// database
 			&cli.StringFlag{
 				Name:  "dbhost",
-				Value: "localhost",
+				Value: "@",
 				Usage: "Database host",
 			},
 			&cli.StringFlag{
 				Name:  "dbuser",
-				Value: "root",
+				Value: "",
 				Usage: "Database user",
 			},
 			&cli.StringFlag{
@@ -56,13 +58,8 @@ func main() {
 			},
 			&cli.StringFlag{
 				Name:  "dbname",
-				Value: "db",
+				Value: "",
 				Usage: "Database name",
-			},
-			&cli.IntFlag{
-				Name:  "dbport",
-				Value: 9000,
-				Usage: "Database port",
 			},
 		},
 	}
@@ -74,11 +71,9 @@ func main() {
 		dbuser := c.String("dbuser")
 		dbpass := c.String("dbpass")
 		dbname := c.String("dbname")
-		dbport := c.Int("dbport")
 
-		// temporary debug flags
-		fmt.Println(fmt.Sprintf("Full flags: host: %s, port: %d \nmysql://%s:%s@%s:%d/%s",
-			host, port, dbuser, dbpass, dbhost, dbport, dbname))
+		service.GetInstance().ConnectDatabase(helpers.GetDbConnectionString(dbuser, dbpass, dbhost, dbname))
+		defer service.GetInstance().Database.Close()
 
 		// todo run through unix socket
 		config := atreugo.Config{
