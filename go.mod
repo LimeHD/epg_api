@@ -14,4 +14,10 @@ require (
 	github.com/urfave/cli v1.22.4 // indirect
 	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect
 	golang.org/x/tools v0.0.0-20200401192744-099440627f01 // indirect
+	github.com/klauspost/compress v1.10.3 // indirect
+	github.com/klauspost/cpuid v1.2.3 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
+	github.com/savsgio/atreugo/v11 v11.0.0
+	github.com/urfave/cli/v2 v2.2.0
 )
