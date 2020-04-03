@@ -76,7 +76,7 @@ func FindOnePlaylist(id int) (bool, Channel) {
 
 	err := service.GetInstance().Database.Select("our_id", "name_ru", "public").
 		From("playlist").
-		Where(dbx.HashExp{"our_id": 113}).
+		Where(dbx.HashExp{"our_id": id}).
 		Limit(1).
 		One(&pl)
 
