@@ -7,13 +7,13 @@ swagger
 swag
 
 # swagger resource
-/cmd
 swaggertmp
 swaggtmp
+cmd
 
 # dependencies
-/vendor
+vendor
 
 # binary directory
-/bin/*
-!/bin/.gitkeep
+bin/*
+!bin/.gitkeep
