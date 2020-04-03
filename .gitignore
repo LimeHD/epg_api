@@ -4,9 +4,12 @@
 # swagger binaries
 swagger.exe
 swagger
+swag
 
 # swagger resource
 /cmd
+swaggertmp
+swaggtmp
 
 # dependencies
 /vendor

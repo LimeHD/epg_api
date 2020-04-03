@@ -10,6 +10,10 @@ GOFILES=$(wildcard *.go)
 # PID file
 PID := /tmp/.$(PROJECTNAME).pid
 
+PROJECTDIR=$(GOBASE)
+SWAGGERTMP=$(PROJECTDIR)/swaggertmp
+SWAGGTMP=$(PROJECTDIR)/swaggtmp
+
 build:
 	@echo "Building $(GOFILES) to ./bin"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o bin/$(PROJECTNAME) $(GOFILES)
@@ -43,19 +47,47 @@ clean:
 	@echo "Cleaning"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go clean
 
-go-path:
+path:
+	@echo "Export go path"
 	export PATH=$PATH:/usr/local/go/bin
 
-.PHONY: build get install run watch start stop restart clean help
+swagger-generate:
+	./swag init
 
-help: ##@Miscellaneous Show this help
+swagger-windows:
+	swagger.exe serve docs/swagger.json
+
+swagger-linux:
+	./swagger serve docs/swagger.json
+
+swagger-prefetch:
+	mkdir $(SWAGGERTMP)
+	git clone https://github.com/go-swagger/go-swagger $(SWAGGERTMP)
+	rm -rf $(SWAGGERTMP)
+
+swagger-install: swagger-prefetch
+	cd $(SWAGGERTMP)/cmd/swagger && go build -o $(PROJECTDIR)
+
+go-swag-install:
+	mkdir $(SWAGGTMP)
+	git clone https://github.com/swaggo/swag $(SWAGGTMP)
+	cd $(SWAGGTMP)/cmd/swag && go build -o $(PROJECTDIR)
+	rm -rf $(SWAGGTMP)
+
+swagger-init: go-swag-install swagger-install
+
+help:
 	@echo -e "Usage: make [target] ...\n"
-	@echo -e "build        : Creates a project executable file"
-	@echo -e "get          : Install all dependencies"
-	@echo -e "install      : Compile and install packages and dependencies"
-	@echo -e "run          : Compile and run Go program"
-	@echo -e "start        : Start project from ./bin directory"
-	@echo -e "start        : Remove object files and cached files"
+	@echo -e "build        		: Creates a project executable file"
+	@echo -e "get          		: Install all dependencies"
+	@echo -e "install      		: Compile and install packages and dependencies"
+	@echo -e "run          		: Compile and run Go program"
+	@echo -e "start        		: Start project from ./bin directory"
+	@echo -e "start        		: Remove object files and cached files"
+	@echo -e "swagger-init 		: Init swagger componenents"
+	@echo -e "swagger-generate 	: Generate swagger docs"
 	@echo -e '\nProject name: ' $(PROJECTNAME)
 	@echo -e "Written by $(SCRIPT_AUTHOR), version $(SCRIPT_VERSION)"
 	@echo -e "Please report any bug or error to the author."
+
+.PHONY: build get install run watch start stop restart clean help path swagger-linux swagger-windows swagger-install

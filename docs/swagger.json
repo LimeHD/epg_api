@@ -80,24 +80,114 @@
         "entries.Channel": {
             "type": "object",
             "properties": {
-                "name_en": {
+                "aspectRatio": {
                     "type": "string"
                 },
-                "name_ru": {
-                    "type": "string"
-                },
-                "our_id": {
+                "cdnvideo": {
                     "type": "integer"
+                },
+                "dayArchive": {
+                    "type": "integer"
+                },
+                "descriptionEn": {
+                    "type": "string"
+                },
+                "descriptionRu": {
+                    "type": "string"
+                },
+                "foreignEpgId": {
+                    "type": "integer"
+                },
+                "foreignUrl": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "isForeign": {
+                    "type": "integer"
+                },
+                "nameEn": {
+                    "type": "string"
+                },
+                "nameRu": {
+                    "type": "string"
+                },
+                "ourId": {
+                    "type": "integer"
+                },
+                "playlistUrl": {
+                    "type": "object",
+                    "$ref": "#/definitions/entries.ChannelUrl"
+                },
+                "public": {
+                    "type": "integer"
+                },
+                "tvprogram": {
+                    "type": "integer"
+                },
+                "withArchive": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entries.ChannelUrl": {
+            "type": "object",
+            "properties": {
+                "epgId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "playlistOurId": {
+                    "type": "integer"
+                },
+                "tz": {
+                    "type": "integer"
+                },
+                "urlArchive": {
+                    "type": "string"
+                },
+                "urlProtocol": {
+                    "type": "string"
+                },
+                "urlSound": {
+                    "type": "string"
+                },
+                "urlStuff": {
+                    "type": "string"
                 }
             }
         },
         "entries.Programm": {
             "type": "object",
             "properties": {
+                "aspect_ratio": {
+                    "type": "string"
+                },
+                "begin": {
+                    "type": "integer"
+                },
+                "current": {
+                    "type": "boolean"
+                },
                 "desc": {
                     "type": "string"
                 },
+                "end": {
+                    "type": "integer"
+                },
+                "rating": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                },
                 "title": {
+                    "type": "string"
+                },
+                "url": {
                     "type": "string"
                 }
             }
@@ -105,6 +195,9 @@
         "entries.ProgrammResponse": {
             "type": "object",
             "properties": {
+                "active": {
+                    "type": "boolean"
+                },
                 "data": {
                     "type": "array",
                     "items": {
