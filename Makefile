@@ -29,7 +29,10 @@ start:
 
 stop:
 	@echo "Stopping bin/$(PROJECTNAME) if it's running"
-	@-kill `[[ -f $(PID) ]] && cat $(PID)` 2>/dev/null || true
+	@echo "PID file: \n" $(PID)
+	@-touch $(PID)
+	@-kill `cat $(PID)` 2> /dev/null || true
+	@-rm $(PID)
 
 restart: clear stop clean build start
 
