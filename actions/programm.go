@@ -2,7 +2,10 @@ package actions
 
 import (
 	"github.com/LimeHD/epg_api/entries"
+	"github.com/LimeHD/epg_api/helpers"
+	"github.com/LimeHD/epg_api/utils"
 	"github.com/savsgio/atreugo/v11"
+	"strconv"
 )
 
 // ProgrammAction godoc
@@ -15,46 +18,24 @@ import (
 // @Router /channels/{id}/programm [get]
 // @Success 200 {array} entries.ProgrammResponse "ok"
 func ProgrammAction(ctx *atreugo.RequestCtx) error {
-	//id := ctx.UserValue("id").(string)
+	id, _ := strconv.Atoi(ctx.UserValue("id").(string))
+	tz := utils.ByteToInt(ctx.QueryArgs().Peek("tz"))
+	msk := utils.ByteToInt(ctx.QueryArgs().Peek("msk"))
+	curdate := utils.ByteToInt(ctx.QueryArgs().Peek("curdate"))
 
-	exampleResponse := []entries.ProgrammResponse{}
-	exampleResponse = append(exampleResponse, entries.ProgrammResponse{
-		Title: "27.03.2020",
-		Name:  "27.03 ПТ",
-		Data: []entries.Programm{
-			{
-				Title: "Проверено на себе",
-				Desc:  "Что делать, если зима выдалась тёплая, а счёт за...",
-			},
-			{
-				Title: "Время покажет",
-				Desc:  "В студии программы обсуждают то, что волнует каждого из нас...",
-			},
-			{
-				Title: "Наедине со всеми",
-				Desc:  "Очень часто журналисты задают стандартные вопросы...",
-			},
-		},
-	})
+	programm, ok := entries.GetProgramm(id, helpers.GetTimezoneByValues(tz, msk), curdate)
 
-	exampleResponse = append(exampleResponse, entries.ProgrammResponse{
-		Title: "28.03.2020",
-		Name:  "28.03 СБ",
-		Data: []entries.Programm{
-			{
-				Title: "Майлз Дэвис: Рождение нового джаза",
-				Desc:  "Биография музыканта, собранная из прежде неизданных архивных материалов и...",
-			},
-			{
-				Title: "Мужское/Женское",
-				Desc:  "Громкие истории, в которых осталось немало домыслов, вопросов и...",
-			},
-			{
-				Title: "Про любовь",
-				Desc:  "Несмотря на фундаментальные разногласия в вопросах любви...",
-			},
-		},
-	})
+	if !ok {
+		return ctx.JSONResponse(make([]string, 0))
+	}
 
-	return ctx.JSONResponse(exampleResponse)
+	if curdate == 1 {
+		if today := programm.GetToday(); today != nil {
+			return ctx.JSONResponse(today)
+		}
+
+		return ctx.JSONResponse(make([]string, 0))
+	}
+
+	return ctx.JSONResponse(programm.MakeFlat())
 }
