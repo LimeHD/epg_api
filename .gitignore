@@ -6,11 +6,11 @@ swagger.exe
 swagger
 
 # swagger resource
-/cmd
+cmd
 
 # dependencies
-/vendor
+vendor
 
 # binary directory
-/bin/*
-!/bin/.gitkeep
+bin/*
+!bin/.gitkeep
