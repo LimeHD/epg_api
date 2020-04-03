@@ -51,3 +51,7 @@ ExecStart=/path/to/build/epg_api
 WantedBy=multi-user.target
 
 ```
+
+### Tests
+
+- Запуск тестов: `go test`
