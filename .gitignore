@@ -7,3 +7,10 @@ swagger
 
 # swagger resource
 /cmd
+
+# dependencies
+/vendor
+
+# binary directory
+/bin/*
+!/bin/.gitkeep
