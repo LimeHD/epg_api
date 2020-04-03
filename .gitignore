@@ -4,8 +4,11 @@
 # swagger binaries
 swagger.exe
 swagger
+swag
 
 # swagger resource
+swaggertmp
+swaggtmp
 cmd
 
 # dependencies

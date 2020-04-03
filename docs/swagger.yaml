@@ -2,22 +2,84 @@ basePath: /v1
 definitions:
   entries.Channel:
     properties:
-      name_en:
+      aspectRatio:
         type: string
-      name_ru:
-        type: string
-      our_id:
+      cdnvideo:
         type: integer
+      dayArchive:
+        type: integer
+      descriptionEn:
+        type: string
+      descriptionRu:
+        type: string
+      foreignEpgId:
+        type: integer
+      foreignUrl:
+        type: string
+      image:
+        type: string
+      isForeign:
+        type: integer
+      nameEn:
+        type: string
+      nameRu:
+        type: string
+      ourId:
+        type: integer
+      playlistUrl:
+        $ref: '#/definitions/entries.ChannelUrl'
+        type: object
+      public:
+        type: integer
+      tvprogram:
+        type: integer
+      withArchive:
+        type: integer
+    type: object
+  entries.ChannelUrl:
+    properties:
+      epgId:
+        type: string
+      id:
+        type: integer
+      playlistOurId:
+        type: integer
+      tz:
+        type: integer
+      urlArchive:
+        type: string
+      urlProtocol:
+        type: string
+      urlSound:
+        type: string
+      urlStuff:
+        type: string
     type: object
   entries.Programm:
     properties:
+      aspect_ratio:
+        type: string
+      begin:
+        type: integer
+      current:
+        type: boolean
       desc:
         type: string
+      end:
+        type: integer
+      rating:
+        type: string
+      time:
+        type: string
       title:
+        type: string
+      url:
         type: string
     type: object
   entries.ProgrammResponse:
     properties:
+      active:
+        type: boolean
       data:
         items:
           $ref: '#/definitions/entries.Programm'
