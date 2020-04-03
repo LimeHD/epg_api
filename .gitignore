@@ -1,1 +1,9 @@
+# ide folder
 .idea
+
+# swagger binaries
+swagger.exe
+swagger
+
+# swagger resource
+/cmd
