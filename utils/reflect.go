@@ -72,3 +72,12 @@ func ByteToInt(b []byte) int {
 	i, _ := strconv.Atoi(string(b))
 	return i
 }
+
+func ContainsIntSlice(slice []int, val int) (int, bool) {
+	for i, item := range slice {
+		if item == val {
+			return i, true
+		}
+	}
+	return -1, false
+}

@@ -5,6 +5,22 @@ import (
 	"time"
 )
 
+func EqualLimeTimeFromPHP(tm ...int64) string {
+	var t time.Time
+
+	if len(tm) > 0 {
+		t = time.Unix(tm[0], 0)
+	} else {
+		t = time.Now()
+	}
+
+	formatted := fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d",
+		t.Year(), t.Month(), t.Day(),
+		t.Hour(), t.Minute(), t.Second())
+
+	return formatted
+}
+
 func YearMonthDay(byTime int64) string {
 	t := time.Unix(byTime, 0)
 	formatted := fmt.Sprintf("%02d.%02d.%d",
