@@ -63,10 +63,10 @@ swagger-linux:
 swagger-prefetch:
 	mkdir $(SWAGGERTMP)
 	git clone https://github.com/go-swagger/go-swagger $(SWAGGERTMP)
-	rm -rf $(SWAGGERTMP)
 
 swagger-install: swagger-prefetch
 	cd $(SWAGGERTMP)/cmd/swagger && go build -o $(PROJECTDIR)
+	rm -rf $(SWAGGERTMP)
 
 go-swag-install:
 	mkdir $(SWAGGTMP)
