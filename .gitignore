@@ -14,3 +14,9 @@ swagger
 # binary directory
 /bin/*
 !/bin/.gitkeep
+
+#grpc
+grpc/client/*
+grpc/server/*
+!grpc/client/client.go
+!grpc/server/server.go

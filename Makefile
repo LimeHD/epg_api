@@ -46,7 +46,10 @@ clean:
 go-path:
 	export PATH=$PATH:/usr/local/go/bin
 
-.PHONY: build get install run watch start stop restart clean help
+proto:
+	protoc  -I . proto/epg.proto --go_out=plugins=grpc:.
+
+.PHONY: build get install run watch start stop restart clean help proto
 
 help: ##@Miscellaneous Show this help
 	@echo -e "Usage: make [target] ...\n"

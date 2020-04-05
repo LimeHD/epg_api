@@ -16,6 +16,7 @@ require (
 	github.com/go-ozzo/ozzo-dbx v1.5.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/go-swagger/go-swagger v0.23.0
+	github.com/golang/protobuf v1.3.5
 	github.com/gorilla/handlers v1.4.2
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/klauspost/compress v1.10.3 // indirect
@@ -25,7 +26,8 @@ require (
 	github.com/swaggo/swag v1.6.5
 	github.com/toqueteos/webbrowser v1.2.0
 	github.com/urfave/cli/v2 v2.2.0
-	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect
+	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e
 	golang.org/x/tools v0.0.0-20200401192744-099440627f01 // indirect
+	google.golang.org/grpc v1.28.0
 	gopkg.in/yaml.v2 v2.2.8
 )
