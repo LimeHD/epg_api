@@ -19,12 +19,15 @@ require (
 	github.com/gorilla/handlers v1.4.2
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/klauspost/compress v1.10.3 // indirect
+	github.com/oschwald/geoip2-golang v1.4.0
 	github.com/savsgio/atreugo/v11 v11.0.0
+	github.com/savsgio/go-logger v1.0.0
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.4.0
 	github.com/swaggo/swag v1.6.5
 	github.com/toqueteos/webbrowser v1.2.0
 	github.com/urfave/cli/v2 v2.2.0
+	github.com/yl2chen/cidranger v1.0.0
 	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect
 	golang.org/x/tools v0.0.0-20200401192744-099440627f01 // indirect
 	gopkg.in/yaml.v2 v2.2.8

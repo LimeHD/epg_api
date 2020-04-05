@@ -17,3 +17,6 @@ vendor
 # binary directory
 bin/*
 !bin/.gitkeep
+
+#geoip
+geoip

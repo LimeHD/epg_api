@@ -3,6 +3,7 @@ package service
 import (
 	dbx "github.com/go-ozzo/ozzo-dbx"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/oschwald/geoip2-golang"
 	"sync"
 )
 
@@ -10,7 +11,8 @@ var once sync.Once
 var instance *Service
 
 type Service struct {
-	Database *dbx.DB
+	Database  *dbx.DB
+	GeoReader *geoip2.Reader
 	// .. config, cache & etc
 }
 
