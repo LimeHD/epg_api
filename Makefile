@@ -76,6 +76,9 @@ go-swag-install:
 
 swagger-init: go-swag-install swagger-install
 
+test:
+	go test -json; exit 0
+
 help:
 	@echo -e "Usage: make [target] ...\n"
 	@echo -e "build        		: Creates a project executable file"
@@ -90,4 +93,4 @@ help:
 	@echo -e "Written by $(SCRIPT_AUTHOR), version $(SCRIPT_VERSION)"
 	@echo -e "Please report any bug or error to the author."
 
-.PHONY: build get install run watch start stop restart clean help path swagger-linux swagger-windows swagger-install
+.PHONY: build get install run watch start stop restart clean help path swagger-linux swagger-windows swagger-install test
