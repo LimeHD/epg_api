@@ -64,6 +64,7 @@ func main() {
 		},
 	}
 
+	// go run . --dbuser root2 --dbpass prizrak211 --dbname limehd --dbhost @
 	app.Action = func(c *cli.Context) error {
 		host := c.String("host")
 		port := c.Int("port")
