@@ -14,11 +14,12 @@ PROJECTDIR=$(GOBASE)
 SWAGGERTMP=$(PROJECTDIR)/swaggertmp
 SWAGGTMP=$(PROJECTDIR)/swaggtmp
 
-build:
+build: get
 	@echo "Building $(GOFILES) to ./bin"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o bin/$(PROJECTNAME) $(GOFILES)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o bin/$(PROJECTNAME) main.go
 
 get:
+	@echo "Download dependencies"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get .
 
 install:
