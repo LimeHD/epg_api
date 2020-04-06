@@ -2,6 +2,12 @@
 
 # API для EPG
 
+Проект является сервисом по выдаче телепрограммы по дням на все телеканалы Лайм и Премиум Лайм. Разработан в рамках разделения общего бекенда на независимые единицы.
+
+### Usage
+
+`./epg_api --dbuser {username_here} --dbpass {passowd_here} --dbname {db_name_here} --dbhost @`
+
 ### Swagger docs
 
 - `make swagger-init`
