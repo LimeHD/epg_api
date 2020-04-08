@@ -17,3 +17,9 @@ vendor
 # binary directory
 bin/*
 !bin/.gitkeep
+
+log/*
+!log/.gitkeep
+
+epg_api
+
