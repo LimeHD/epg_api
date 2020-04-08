@@ -22,4 +22,4 @@ log/*
 !log/.gitkeep
 
 epg_api
-
+.envrc
