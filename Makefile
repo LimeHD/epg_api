@@ -18,7 +18,10 @@ build: get
 	@echo "Building $(GOFILES) to ./bin"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o bin/$(PROJECTNAME) main.go
 
-get:
+env:
+	@env
+
+get: env
 	@echo "Download dependencies"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get .
 
