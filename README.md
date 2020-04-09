@@ -4,6 +4,11 @@
 
 HTTP-сервис по выдаче телепрограммы по дням на все телеканалы Лайм и Премиум Лайм. Разработан в рамках разделения общего бекенда на независимые единицы.
 
+### Endpoints
+
+- `/channels` - return list of all channels
+- `/channel/{id}/programm` - return tv programm for target channel, option get params: `curdate`, `tz`, `msk` all `integer`
+
 ### Usage
 
 `./epg_api --dbuser {username_here} --dbpass {passowd_here} --dbname {db_name_here} --dbhost @`
