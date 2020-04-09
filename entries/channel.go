@@ -10,21 +10,21 @@ import (
 )
 
 type Channel struct {
-	OurId         int
-	NameRu        string
-	NameEn        string
-	IsForeign     int
-	ForeignUrl    string
-	ForeignEpgId  int
-	Public        int
-	DayArchive    int
-	WithArchive   int
-	Tvprogram     int
-	Cdnvideo      int
-	DescriptionEn string
-	DescriptionRu string
-	Image         string
-	AspectRatio   string
+	OurId         int    `json:"our_id"`
+	NameRu        string `json:"name_ru"`
+	NameEn        string `json:"name_en"`
+	IsForeign     int    `json:"is_foreign"`
+	ForeignUrl    string `json:"foreign_url"`
+	ForeignEpgId  int    `json:"foreign_epg_id"`
+	Public        int    `json:"public"`
+	DayArchive    int    `json:"day_archive"`
+	WithArchive   int    `json:"with_archive"`
+	Tvprogram     int    `json:"tvprogram"`
+	Cdnvideo      int    `json:"cdnvideo"`
+	DescriptionEn string `json:"description_en"`
+	DescriptionRu string `json:"description_ru"`
+	Image         string `json:"image"`
+	AspectRatio   string `json:"aspect_ratio"`
 
 	PlaylistUrl ChannelUrl
 }
@@ -38,6 +38,22 @@ type ChannelUrl struct {
 	UrlStuff      string
 	Tz            int
 	EpgId         sql.NullInt32
+}
+
+func GetChannelList() []Channel {
+	var channels []Channel
+
+	err := service.GetInstance().Database.Select("p.our_id", "p.name_ru", "p.name_en").
+		From("playlist p").
+		OrderBy("sort ASC").
+		All(&channels)
+
+	if err != nil {
+		// todo bugsnag
+		panic(err)
+	}
+
+	return channels
 }
 
 func (playlist *Channel) GetEpgId(tz int) (bool, int) {
