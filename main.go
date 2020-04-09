@@ -86,6 +86,15 @@ func main() {
 		server.Path("GET", "/channels", actions.ChannelsAction)
 		server.Path("GET", "/channels/{id}/programm", actions.ProgrammAction)
 
+		static := server.NewGroupPath("/docs")
+		static.ServeFile("/swagger", "docs/index.html")
+		static.ServeFile("/swagger-ui.css", "docs/assets/swagger-ui.css")
+		static.ServeFile("/uifavicon-32x32.png", "docs/assets/uifavicon-32x32.png")
+		static.ServeFile("/uifavicon-16x16.png", "docs/assets/uifavicon-16x16.png")
+		static.ServeFile("/swagger-ui-bundle.js", "docs/assets/swagger-ui-bundle.js")
+		static.ServeFile("/swagger-ui-standalone-preset.js", "docs/assets/swagger-ui-standalone-preset.js")
+		static.ServeFile("/swagger.yaml", "docs/swagger.yaml")
+
 		err := server.ListenAndServe()
 
 		if err != nil {
