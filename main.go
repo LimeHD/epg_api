@@ -86,6 +86,7 @@ func main() {
 		server.Path("GET", "/channels", actions.ChannelsAction)
 		server.Path("GET", "/channels/{id}/programm", actions.ProgrammAction)
 
+		// todo нужно перенести ресурсы js, css и иконки на cdn и останется только swagger.yaml  индексной страничкой
 		static := server.NewGroupPath("/docs")
 		static.ServeFile("/swagger", "docs/index.html")
 		static.ServeFile("/swagger-ui.css", "docs/assets/swagger-ui.css")
