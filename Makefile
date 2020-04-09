@@ -18,18 +18,15 @@ build: get
 	@echo "Building $(GOFILES) to ./bin"
 	$(GO) build -o bin/$(PROJECTNAME) main.go
 
-env:
-	@env
-
-get: env
+get:
 	@echo "Download dependencies"
 	$(GO) get .
 
 install:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOFILES)
+	$(GO) install $(GOFILES)
 
 run:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run $(GOFILES)
+	$(go) run $(GOFILES)
 
 start:
 	@echo "Starting bin/$(PROJECTNAME)"
@@ -49,7 +46,7 @@ clear:
 
 clean:
 	@echo "Cleaning"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go clean
+	$(GO) clean
 
 path:
 	@echo "Export go path"
