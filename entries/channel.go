@@ -67,7 +67,7 @@ func (playlist *Channel) FindPlaylistByTZ(tz int) {
 		One(&playlist.PlaylistUrl)
 
 	if err != nil {
-		panic(err)
+		service.GetInstance().BugsnagNotifier.Notify(err)
 	}
 }
 
@@ -81,6 +81,7 @@ func FindOnePlaylist(id int) (bool, Channel) {
 		One(&pl)
 
 	if err != nil {
+		service.GetInstance().BugsnagNotifier.Notify(err)
 		return false, pl
 	}
 

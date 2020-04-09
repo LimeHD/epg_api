@@ -4,6 +4,8 @@ go 1.13
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/bugsnag/bugsnag-go v1.5.3
+	github.com/bugsnag/panicwrap v1.2.0 // indirect
 	github.com/corbym/gocrest v1.0.3
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/go-openapi/analysis v0.19.10
@@ -16,10 +18,13 @@ require (
 	github.com/go-ozzo/ozzo-dbx v1.5.0
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/go-swagger/go-swagger v0.23.0
+	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/gorilla/handlers v1.4.2
 	github.com/jessevdk/go-flags v1.4.0
+	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/klauspost/compress v1.10.3 // indirect
 	github.com/savsgio/atreugo/v11 v11.0.0
+	github.com/savsgio/go-logger v1.0.0
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.4.0
 	github.com/swaggo/swag v1.6.5

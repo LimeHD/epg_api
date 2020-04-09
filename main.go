@@ -61,6 +61,12 @@ func main() {
 				Value: "",
 				Usage: "Database name",
 			},
+
+			&cli.StringFlag{
+				Name:  "bugsnag_key",
+				Value: "",
+				Usage: "Bugsnag API key",
+			},
 		},
 	}
 
@@ -72,7 +78,9 @@ func main() {
 		dbuser := c.String("dbuser")
 		dbpass := c.String("dbpass")
 		dbname := c.String("dbname")
+		bugsnagApiKey := c.String("bugsnag_key")
 
+		service.GetInstance().RegisterBugsnagNotifier(bugsnagApiKey)
 		service.GetInstance().ConnectDatabase(helpers.GetDbConnectionString(dbuser, dbpass, dbhost, dbname))
 		defer service.GetInstance().Database.Close()
 

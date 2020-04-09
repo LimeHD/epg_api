@@ -124,6 +124,7 @@ func GetProgramm(id int, tz int, curdate int) (*DaysResponse, bool) {
 		All(&epgModels)
 
 	if err != nil {
+		service.GetInstance().BugsnagNotifier.Notify(err)
 		return days, false
 	}
 
