@@ -4,29 +4,29 @@ SCRIPT_VERSION=0.0.1.dev
 
 # Go related variables.
 GOBASE=$(shell pwd)
-GOPATH := $(GOBASE)/vendor:$(GOBASE)
+# GOPATH := $(GOBASE)/vendor:$(GOBASE)
 GOBIN=$(GOBASE)/bin
 GOFILES=$(wildcard *.go)
 # PID file
 PID := /tmp/.$(PROJECTNAME).pid
-
+GO:=$(HOME)/.goenv/bin/goenv exec go
 PROJECTDIR=$(GOBASE)
 SWAGGERTMP=$(PROJECTDIR)/swaggertmp
 SWAGGTMP=$(PROJECTDIR)/swaggtmp
 
 build: get
 	@echo "Building $(GOFILES) to ./bin"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build -o bin/$(PROJECTNAME) main.go
+	$(GO) build -o bin/$(PROJECTNAME) main.go
 
 get:
 	@echo "Download dependencies"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get .
+	$(GO) get .
 
 install:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOFILES)
+	$(GO) install $(GOFILES)
 
 run:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run $(GOFILES)
+	$(go) run $(GOFILES)
 
 start:
 	@echo "Starting bin/$(PROJECTNAME)"
@@ -46,7 +46,7 @@ clear:
 
 clean:
 	@echo "Cleaning"
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go clean
+	$(GO) clean
 
 path:
 	@echo "Export go path"
