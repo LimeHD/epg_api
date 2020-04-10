@@ -1,0 +1,2 @@
+# ignore all gziped resources
+*.fasthttp.gz
