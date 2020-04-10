@@ -8,10 +8,11 @@ HTTP-сервис по выдаче телепрограммы по дням н�
 
 - `/channels` - return list of all channels
 - `/channel/{id}/programm` - return tv programm for target channel, option get params: `curdate`, `tz`, `msk` all `integer`
+- `/docs/swagger` - View swagger docs
 
 ### Usage
 
-`./epg_api --dbuser {username_here} --dbpass {passowd_here} --dbname {db_name_here} --dbhost @`
+`./epg_api --dbuser {username_here} --dbpass {passowd_here} --dbname {db_name_here} --dbhost {@} --bugsnag_key {key_here}`
 
 ### Swagger docs
 
