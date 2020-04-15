@@ -40,7 +40,7 @@ bundle exec cap STAGE systemd:go:setup
 Текущую или любую ветку (запросит при деплое)
 
 ```
-bundle exec cap STAGA deploy
+bundle exec cap STAGE deploy
 ```
 
 Где STAGE = production|reproduction
@@ -48,12 +48,13 @@ bundle exec cap STAGA deploy
 Ветку master
 
 ```
-> BRANCH=master bundle exec cap production deploy
+BRANCH=master bundle exec cap production deploy
 ```
 
 Зайти на боевой сервер и посмотреть что там да как
 
 ```
-> cap production shell
+cap production shell
+tail -f log/epg_api.log
 ```
 
