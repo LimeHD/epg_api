@@ -19,8 +19,18 @@ set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 namespace :deploy do
   after 'updated', :build_go
-  after 'publishing', 'systemd:epg_api:restart'
-  # after 'publishing', 'systemd:example2:reload-or-restart'
+  after 'publishing', 'systemd:go:restart'
+end
+
+namespace :systemd do
+  before 'go:setup', :mkdir_user_systemd
+end
+
+# TODO Вынести в capistrano-systemd
+task :mkdir_user_systemd do
+  on release_roles(:app) do
+    execute "mkdir -p /home/#{fetch(:user)}/.config/systemd/user"
+  end
 end
 
 GO_BIN='/opt/go/1.13.9/bin/go'

@@ -4,12 +4,12 @@ After=network.target
 
 [Service]
 WatchdogSec=30
-Type=notify
-Environment=GO_ENV=<%= fetch(:rack_env) %>
+Type=simple
 Environment=PWD=<%= current_path %>
-EnvironmentFile=<%= shared_path %>/.env
-WorkingDirectory = <%= current_path %>
-ExecStart = /opt/go/1.13.9/bin/go ./epg_api 
+# Environment=GO_ENV=<%= fetch(:rack_env) %>
+# EnvironmentFile=<%= shared_path %>/.env
+WorkingDirectory=<%= current_path %>
+ExecStart=/bin/sh -c '<%= current_path %>/epg_api >> <%= shared_path %>/log/epg_api.log 2>&1'
 KillMode=mixed
 Restart=always
 
