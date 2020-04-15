@@ -18,13 +18,15 @@ end
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 namespace :deploy do
-  # after 'updated', :build_go
+  after 'updated', :build_go
+  after 'publishing', 'systemd:epg_api:restart'
+  # after 'publishing', 'systemd:example2:reload-or-restart'
 end
 
 GO_BIN='/opt/go/1.13.9/bin/go'
 desc 'Build script on golang'
 task :build_go do
   on release_roles(:app) do
-    execute "cd #{release_path}; #{GO_BIN} get && #{GO_BIN} build"
+    execute "cd #{release_path}; #{GO_BIN} get && #{GO_BIN} build -a"
   end
 end
