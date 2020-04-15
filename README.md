@@ -6,7 +6,7 @@ HTTP-сервис по выдаче телепрограммы по дням н�
 
 ## TODO
 
-* [ ] *Логи в ./log/application.log
+* [ ] Логи в ./log/application.log
 * [ ] add bugsnag
 * [ ] избавиться от билда на разворачиваемом сервере
 
@@ -45,7 +45,7 @@ bundle exec cap STAGE deploy
 
 Где STAGE = production|reproduction
 
-Ветку master
+Например разворачиваем ветку master на боевом сервере:
 
 ```
 BRANCH=master bundle exec cap production deploy
