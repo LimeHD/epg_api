@@ -35,14 +35,7 @@ end
 
 desc 'Transfer build'
 task :transfer_build do
-  binding.pry
-  upload! fetch(:application), fetch(:current_path) #'/home/some_user/somewhere'
-end
-
-GO_BIN='/opt/go/1.13.9/bin/go'
-desc 'Build script on golang'
-task :build_go do
   on release_roles(:app) do
-    execute "cd #{release_path}; #{GO_BIN} get && #{GO_BIN} build -a"
+    upload! fetch(:application), release_path
   end
 end
