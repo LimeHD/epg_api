@@ -18,7 +18,7 @@ end
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 namespace :deploy do
-  after 'updated', :build_go
+  after 'updated', :transfer_build
   after 'publishing', 'systemd:go:restart'
 end
 
@@ -31,6 +31,12 @@ task :mkdir_user_systemd do
   on release_roles(:app) do
     execute "mkdir -p /home/#{fetch(:user)}/.config/systemd/user"
   end
+end
+
+desc 'Transfer build'
+task :transfer_build do
+  binding.pry
+  upload! fetch(:application), fetch(:current_path) #'/home/some_user/somewhere'
 end
 
 GO_BIN='/opt/go/1.13.9/bin/go'
