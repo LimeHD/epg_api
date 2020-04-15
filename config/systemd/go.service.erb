@@ -9,7 +9,7 @@ Environment=PWD=<%= current_path %>
 # Environment=GO_ENV=<%= fetch(:rack_env) %>
 # EnvironmentFile=<%= shared_path %>/.env
 WorkingDirectory=<%= current_path %>
-ExecStart=/bin/sh -c '<%= current_path %>/epg_api >> <%= shared_path %>/log/epg_api.log 2>&1'
+ExecStart=/bin/sh -c '<%= current_path %>/<%= fetch(:application) %> >> <%= shared_path %>/log/<%= fetch(:application) %>.log 2>&1'
 KillMode=mixed
 Restart=always
 
