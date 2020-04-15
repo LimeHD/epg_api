@@ -58,3 +58,9 @@ cap production shell
 tail -f log/epg_api.log
 ```
 
+Список всех команд выполняемых на сервере:
+
+
+```
+cap production -T
+```
