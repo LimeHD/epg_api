@@ -7,7 +7,8 @@ HTTP-сервис по выдаче телепрограммы по дням н�
 ## TODO
 
 * [ ] *Логи в ./log/application.log
-* [ ] bugsnag
+* [ ] add bugsnag
+* [ ] избавиться от билда на разворачиваемом сервере
 
 ### Endpoints
 
@@ -33,14 +34,16 @@ HTTP-сервис по выдаче телепрограммы по дням н�
 Разворачивание впервые на свежем сервере
 
 ```
-> bundle exec cap STAGE systemd:epg_api:setup
+bundle exec cap STAGE systemd:go:setup
 ```
 
 Текущую или любую ветку (запросит при деплое)
 
 ```
-> bundle exec cap production deploy
+bundle exec cap STAGA deploy
 ```
+
+Где STAGE = production|reproduction
 
 Ветку master
 
