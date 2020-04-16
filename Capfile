@@ -12,3 +12,6 @@ require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
 require 'capistrano/shell'
+
+require 'capistrano/systemd/multiservice'
+install_plugin Capistrano::Systemd::MultiService.new_service('go', service_type: 'user')

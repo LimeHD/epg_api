@@ -18,13 +18,24 @@ end
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 namespace :deploy do
-  # after 'updated', :build_go
+  after 'updated', :transfer_build
+  after 'publishing', 'systemd:go:restart'
 end
 
-GO_BIN='/opt/go/1.13.9/bin/go'
-desc 'Build script on golang'
-task :build_go do
+namespace :systemd do
+  before 'go:setup', :mkdir_user_systemd
+end
+
+# TODO Вынести в capistrano-systemd
+task :mkdir_user_systemd do
   on release_roles(:app) do
-    execute "cd #{release_path}; #{GO_BIN} get && #{GO_BIN} build"
+    execute "mkdir -p /home/#{fetch(:user)}/.config/systemd/user"
+  end
+end
+
+desc 'Transfer build'
+task :transfer_build do
+  on release_roles(:app) do
+    upload! fetch(:application), release_path
   end
 end

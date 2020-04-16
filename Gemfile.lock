@@ -10,6 +10,8 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-shell (0.2.0)
       capistrano (~> 3.1)
+    capistrano-systemd-multiservice (0.1.0.beta9)
+      capistrano (>= 3.7.0, < 3.14.0)
     concurrent-ruby (1.1.6)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
@@ -27,6 +29,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   capistrano-shell
+  capistrano-systemd-multiservice
 
 BUNDLED WITH
    2.1.4
